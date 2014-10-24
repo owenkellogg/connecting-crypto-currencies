@@ -13,117 +13,55 @@ the following abilities, all using Node.js:
 - List payments history
 - Send payments from an account 
 - Monitor for payments to the address
-- Record incoming payments in a database
+- Record incoming payments to a queue
 - Send outgoing payments from a queue
 
-### Generate a new payment address
+## Getting started
 
-#### Bitcoin
+Configuration for the bitcoind, dogecoind, and Ripple REST
+rpc interfaces contains sensitive and secret information.
+Put this configuration in config.json which is added to the
+.gitignore file so you will not accidentally check your
+secrets into source control.
 
-    getnewaddress ""
+You will also need Redis installed locally, which can be
+done with your system's package manager. Once installed 
+start Redis by running `redis-server`. Redis will be used
+in the later lessons to provide a queuing service.
 
-#### Ripple
+## Resources
 
-    GET /v1/wallet/new
+### Bitcoin
 
-#### Dogecoin
+    running bitcoind on ubuntu: https://degreesofzero.com/article/installing-bitcoind-on-ubuntu.html
+    block explorer: https://blockexplorer.com/q/getblockcount
+    using the bitcoind command line interface
+    using the bitcoind rpc interface: https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list
+        ndoe-bitcoin javascript library for interacting with bitcoind: https://github.com/freewil/node-bitcoin
+        generating new receive addresses: https://github.com/freewil/node-bitcoin
+        monitoring for payments made to receive addresses: https://github.com/stevenzeiler/blockchain-account-monitor
+        sending payments from the bitcoind wallet: https://github.com/freewil/node-bitcoin
 
-    getnewaddress ""
+### Ripple
 
-### List Account Balances
+    running Ripple REST on ubuntu: https://github.com/ripple/ripple-rest/#installing-and-running
+    using the Ripple REST interface: http://dev.ripple.com/ripple-rest.html
+        generating new ripple accounts: http://dev.ripple.com/ripple-rest.html#generate-account
+        funding new ripple accounts with XRP: http://dev.ripple.com/ripple-rest.html#submit-payment
+        monitoring for payments made to ripple accounts: https://github.com/stevenzeiler/ripple-account-monitor
+        connecting to a gateway and currency: http://dev.ripple.com/ripple-rest.html#granting-a-trustline
+        sending payments of currencies from a ripple account: http://dev.ripple.com/ripple-rest.html#prepare-payment
 
-#### Bitcoin
+### Dogecoin
 
-    getbalance <account> <minconf=1>
+    running the dogecoind on ubuntu: http://b.agilob.net/such-address-many-dig-on-linux-wow/
+    dogechain.info block explorer: https://dogechain.info/chain/Dogecoin
+    using the dogecoin rpc interface: 
+        (node.js dogecoin client)[https://github.com/countable/node-dogecoin]
 
-    getbalance "" 6
+### Resque
 
-    listunspent <minconf=1>
-
-#### Ripple
-
-    GET /v1/accounts/:account/balances/
-
-#### Dogecoin
-
-    getbalance <account> <minconf=1>
-
-    listunspent <minconf=1>
-
-### List Payemnts History
-
-#### Bitcoin
-
-    listtransactions <account> <count=0> <from=0>
-
-#### Ripple
-
-    GET /v1/accounts/{account}/payments
-
-#### Dogecoin
-
-    listtransactions <account> <count=0> <from=0>
-
-### Send Payments from an Account
-
-#### Bitcoin
-
-    sendtoaddress <address> <amount>
-
-#### Ripple
-
-    GET /v1/accounts/{account}/payments/paths/{destination}/{amount}
-
-    POST /v1/accunts/{account}/payments/
-
-####Dogecoin
-
-    sendtoaddress <address> <amount>
-
-### Monitor for Payments to an Address
-
-#### Bitcoin
-
-    listsinceblock <blockhash> <target-confirmations>
-
-    // require('blockchain-account-monitor');
-
-#### Ripple
-
-    GET /v1/accounts/{account}/notifications/{transaction_hash}
-    GET /v1/accounts/{account}/payments/{payment}
-
-    // require('ripple-account-monitor');
-
-#### Dogecoin
-
-    listsinceblock <blockhash> <target-confirmations>
-
-    // require('blockchain-account-monitor');
-
-### Record Incoming Payments in a SQL Queue
-
-#### Bitcoin
-
-#### Ripple
-
-    var Sequlize = require('sequelize');
-    // Parse payment object into model
-
-#### Dogecoin
-
-### Send Outgoing Payments from a SQL Queue
-
-#### Bitcoin
-
-    // https://github.com/gatewayd/blockchain-bridge/blob/master/processes/out-to-blockchain.js
-
-#### Ripple
-
-    var Worker = require('sql-mq-worker');
-    // Send payment as described above
-
-#### Dogecoin
-
-    // https://github.com/gatewayd/blockchain-bridge/blob/master/processes/out-to-blockchain.js
+    (Node.js Resque client implementation by Task Rabbit)[https://github.com/taskrabbit/node-resque]
+    (Resque home page)[http://resquework.org/]
+    (Redis home page)[http://redis.io/]
 
