@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nconf": "^0.6.9",
     "superagent": "^0.20.0",
     "bitcoin": "^2.2.0",
-    "nconf": "^0.6.9",
     "ripple-rest-client": "^1.10.2",
-    "node-dogecoin": "^0.3.9"
+    "node-dogecoin": "^0.3.9",
+    "blockchain-account-monitor": "^0.2.0",
+    "ripple-account-monitor": "^2.0.0"
   }
 }
