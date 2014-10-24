@@ -11,7 +11,7 @@ can process payments serially over time.
 
 The bitcoin network bundles payments together in a package
 known as a block, delivering a new block of payments every
-ten minutes or so. Payments are said to have on "confirmation"
+ten minutes or so. Payments are said to have one "confirmation"
 for every subsequent block that is validated by the network
 after the block containing the payment. Wait for up to six
 additional blocks for (nearly) absolute certainty that you
@@ -34,11 +34,11 @@ account and yield any new blocks of payments before moving on.
 
     node lessons/5-monitor-incoming-payments/bitcoin.js
 
-Internall the Blockchain Account Monitor calls
+Internally the Blockchain Account Monitor calls listsinceblock with the most recently processed block hash.
 
     bitcoin.listSinceBlock("00000000000000000f8cfbde18837bdbff29e376067ed4a5104df982664932bb", console.log);
 
-Rippled will return a list of payments since the specified block:
+Bitcoin will return a list of payments since the specified block:
 
     {
         "error": null,
