@@ -43,10 +43,7 @@ to the account controlled by the bitcoind:
 
 ### Ripple
 
-Ripple has a single native currency called XRP used to pay network
-usage fees, but an account can have balances that represent any
-asset imaginable. The Ripple network ledger can determine the current
-balances for each asset and asset issuer for a given account.
+Anyone can see the payment of any account on Ripple by querying its RPC interface:
 
     curl https://api.ripple.com/v1/accounts/r4EwBWxrx5HxYRyisfGzMto3AT8FZiYdWk/payments
 
@@ -60,9 +57,66 @@ the account provided:
     {
       "success": true,
       "payments": [
-        <Payment>,
-        <Payment>,
-        <Payment>
+
+        {
+
+          "client_resource_id": "",
+          "payment": {
+              "source_account": "rwdWaSmn53SEY3XuAVxbrioYupJAfEuBHC",
+              "source_tag": "",
+              "source_amount": {
+                  "currency": "BTC",
+                  "issuer": "rwdWaSmn53SEY3XuAVxbrioYupJAfEuBHC",
+                  "value": "1.01"
+              },
+              "source_slippage": "0",
+              "destination_account": "r4EwBWxrx5HxYRyisfGzMto3AT8FZiYdWk",
+              "destination_tag": "",
+              "destination_amount": {
+                  "currency": "BTC",
+                  "issuer": "r4EwBWxrx5HxYRyisfGzMto3AT8FZiYdWk",
+                  "value": "1"
+              },
+              "invoice_id": "",
+              "paths": "[]",
+              "no_direct_ripple": false,
+              "partial_payment": false,
+              "direction": "incoming",
+              "state": "validated",
+              "result": "tesSUCCESS",
+              "ledger": "9446080",
+              "hash": "A1DE175097CEF1BEF9F8DA207497C01B2779FF039D072E95F08712A5E445109D",
+              "timestamp": "2014-10-18T18:35:30.000Z",
+              "fee": "0.012",
+              "source_balance_changes": [
+                  {
+                      "value": "-0.012",
+                      "currency": "XRP",
+                      "issuer": ""
+                  },
+                  {
+                      "value": "-1",
+                      "currency": "BTC",
+                      "issuer": "rwdWaSmn53SEY3XuAVxbrioYupJAfEuBHC"
+                  }
+              ],
+              "destination_balance_changes": [
+                  {
+                      "value": "1",
+                      "currency": "BTC",
+                      "issuer": "rwdWaSmn53SEY3XuAVxbrioYupJAfEuBHC"
+                  }
+              ],
+              "memos": [
+                  {
+                      "MemoData": "7274312E302E31302D31",
+                      "MemoType": "636C69656E74"
+                  }
+              ]
+          }
+
+      },
+      etc...
       ]
     }
 
