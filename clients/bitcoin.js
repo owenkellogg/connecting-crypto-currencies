@@ -1,8 +1,5 @@
 var bitcoin = require('bitcoin');
-
-var config = require('nconf')
-
-config.file({ file: __dirname+'/../config.json' })
+var config = require(__dirname+'/../environment.js');
 
 var client = new bitcoin.Client(config.get("BITCOIN"));
 
